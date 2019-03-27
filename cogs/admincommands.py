@@ -143,7 +143,7 @@ class AdminCommands(commands.Cog):
 
     @commands.group(aliases=["purge"], invoke_without_command=True)
     @customchecks.has_permissions(manage_messages=True, read_message_history=True)
-    async def prune(self, ctx, pruneNum: int, olderThanId = 0):
+    async def prune(self, ctx, pruneNum: int, olderThanId: int = 0):
         """
         Prunes a certain amount of messages. Can also use message ID.
         Maximum amount of messages to prune is 300.
@@ -155,7 +155,7 @@ class AdminCommands(commands.Cog):
 
         else:
             message = await ctx.get_message(pruneNum)
-            if olderThanId = 0:
+            if olderThanId == 0:
                 await ctx.channel.purge(after=message)
             else:
                 newestMessage = await ctx.get_message(olderThanId)
